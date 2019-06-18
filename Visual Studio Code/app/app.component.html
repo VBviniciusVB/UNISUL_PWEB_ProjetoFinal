@@ -1,0 +1,23 @@
+<p-contextMenu [global]="true" [model]="items1"></p-contextMenu>
+
+<p-contextMenu [target]="img" [model]="items2"></p-contextMenu>
+
+
+
+<p-toolbar>
+  <div class="ui-toolbar-group-left" >
+    <img #img src="assets/logo.png" alt="Logo" class="LogoImage" >
+    <button pButton type="button"  label="Livros" icon="pi pi-search" routerLink="/livros" class="LogoButton"></button>
+    <button pButton type="button" label=" Clientes " icon="pi pi-user-plus" routerLink="/clientes" class="LogoButton"></button>
+    <button pButton type="button" label=" Empréstimos " icon="pi pi-user" routerLink="/emprestimos" class="LogoButton"></button>
+  </div>
+  <div class="ui-toolbar-group-right" >
+    <button pButton type="button" label="Login" icon="pi pi-key" class="ui-button-danger" class="LogoButton"></button>
+  </div>
+</p-toolbar>
+
+
+
+<router-outlet></router-outlet>
+
+
