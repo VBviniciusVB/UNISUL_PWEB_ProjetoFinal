@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import br.unisul.provafinal.domain.Cliente;
 import br.unisul.provafinal.domain.Emprestimo;
+import br.unisul.provafinal.domain.EmprestimoPedido;
 import br.unisul.provafinal.domain.Livro;
 import br.unisul.provafinal.repositories.ClienteRepository;
+import br.unisul.provafinal.repositories.EmprestimoPedidoRepository;
 import br.unisul.provafinal.repositories.EmprestimoRepository;
 import br.unisul.provafinal.repositories.LivroRepository;
 
@@ -18,7 +20,10 @@ import br.unisul.provafinal.repositories.LivroRepository;
 public class EmprestimoService {
 
 	@Autowired
-	private EmprestimoRepository emprestimoService;
+	private EmprestimoRepository repo;
+	
+	@Autowired
+	private EmprestimoRepository emprestimoPedidoRepository;
 	
 	@Autowired
 	private LivroService livroService;
@@ -28,23 +33,27 @@ public class EmprestimoService {
 	
 
 	public Emprestimo buscar(Integer id) {
-		Optional<Emprestimo> obj = emprestimoService.findById(id);
+		Optional<Emprestimo> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
 	
 	public Emprestimo insert(Emprestimo obj) {
 		obj.setId(null);
 		obj.setDataemprestimo(new Date());
-		obj.setDatadevolucao(new Date());
-		obj.setCliente(clienteService.find(obj.getCliente().getId()));
-		obj = emprestimoService.save(obj);
-		// AKI
+		obj.setLivro(livroService.find(obj.getLivro().getId()));
+		obj = repo.save(obj);
+		
+		for (EmprestimoPedido ip : obj.getItens()) {
+			ip.setCliente(clienteService.find(ip.getCliente().getId()));
+			ip.setEmprestimo(obj);
+		}
+		emprestimoPedidoRepository.saveAll(obj.getItens());
 		return obj;
 	}
 	
 	public List<Emprestimo> findByCliente(Integer idCliente) {
 		Cliente cliente = clienteService.find(idCliente);
-		return emprestimoService.findByCliente(cliente);
+		return repo.findByCliente(cliente);
 	}
 
 }

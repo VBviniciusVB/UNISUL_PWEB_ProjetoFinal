@@ -1,19 +1,19 @@
-import { Cliente } from '../model';
+import { Emprestimo } from '../model';
 import { Component, OnInit } from '@angular/core';
-import { ClientesService } from '../clientes.service';
+import { EmprestimosService } from '../emprestimos.service';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-clientes-opcoes',
-  templateUrl: './clientes-opcoes.component.html',
-  styleUrls: ['./clientes-opcoes.component.css']
+  selector: 'app-emprestimos-opcoes',
+  templateUrl: './emprestimos-opcoes.component.html',
+  styleUrls: ['./emprestimos-opcoes.component.css']
 })
-export class ClientesOpcoesComponent implements OnInit {
+export class EmprestimosOpcoesComponent implements OnInit {
 
-  cliente = new Cliente();
-  clientes = [];
+  emprestimo = new Emprestimo();
+  emprestimos = [];
 
   index: number = 0;
   Editar: boolean = true;
@@ -21,7 +21,7 @@ export class ClientesOpcoesComponent implements OnInit {
   nomeBusca:string;
 
   constructor(
-    private service: ClientesService,
+    private service: EmprestimosService,
     private messageService: MessageService,
     private rota: ActivatedRoute,
     private conf: ConfirmationService
@@ -33,16 +33,16 @@ export class ClientesOpcoesComponent implements OnInit {
   }
 
   inserir(form: FormControl) {
-    this.service.adicionar(this.cliente)
+    this.service.adicionar(this.emprestimo)
     .then( ()=>{
-      this.messageService.add({severity:'success', summary:'Inserção Concluida', detail:'O cliente '+this.cliente.nome+' foi adicionado'});
+
     });
   }
 
   alterar(form: FormControl) {
-    this.service.alterar(this.cliente)
+    this.service.alterar(this.emprestimo)
     .then( ()=>{
-      this.messageService.add({severity:'success', summary:'Edição Concluida', detail:'O cliente '+this.cliente.nome+' foi alterado'});
+      this.messageService.add({severity:'success', summary:'Edição Concluida', detail:'O emprestimo '+this.emprestimo.id+' foi alterado'});
     });
   }
 
@@ -54,34 +54,34 @@ export class ClientesOpcoesComponent implements OnInit {
     }
   }
 
-  excluir(cliente: any){
-    this.service.excluir(cliente.id)
+  excluir(emprestimo: any){
+    this.service.excluir(emprestimo.id)
     .then(()=>{
       this.pesquisar();
-      this.messageService.add({severity:'success', summary:'Exclusão', detail:'Cliente '+cliente.nome+' excluída'});
+      this.messageService.add({severity:'success', summary:'Exclusão', detail:'Emprestimo '+emprestimo.id+' excluída'});
     });
   }
 
   pesquisar(){
     this.service.pesquisar({nome:this.nomeBusca})
     .then((dados)=>{
-      this.clientes=dados;
+      this.emprestimos=dados;
     });
   }
 
-  carregarCliente(id:number){
+  carregarEmprestimo(id:number){
     this.service.buscarPorCodigo(id)
       .then((data) => {
-        this.cliente = data;
+        this.emprestimo = data;
       }
     );
   }
 
-  ConfirmarExclusao(cliente:any){
+  ConfirmarExclusao(emprestimo:any){
     this.conf.confirm({
-      message: 'Tem certeza que deseja excluir '+cliente.nome+'?',
+      message: 'Tem certeza que deseja excluir '+emprestimo.nome+'?',
       accept: () => {
-        this.excluir(cliente);
+        this.excluir(emprestimo);
       }
     });
   }
@@ -92,7 +92,7 @@ export class ClientesOpcoesComponent implements OnInit {
 
   OpenCadastro(ID) {
     this.index = 1;
-    this.carregarCliente(ID);
+    this.carregarEmprestimo(ID);
     this.Editar = false;
 }
 

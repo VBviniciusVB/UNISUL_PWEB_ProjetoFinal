@@ -69,6 +69,8 @@ public class Emprestimo implements Serializable {
 		this.itens = itens;
 	}
 	
+	
+	
 	public Date getDataemprestimo() {
 		return dataemprestimo;
 	}

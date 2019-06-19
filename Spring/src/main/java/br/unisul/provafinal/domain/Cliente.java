@@ -43,9 +43,9 @@ public class Cliente implements Serializable {
 	
 	// Fim das variáveis
 
-	//@JsonIgnore
-	//@OneToMany(mappedBy="cliente")
-	//private List<Emprestimo> emprestimos = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(mappedBy="cliente")
+	private List<Emprestimo> emprestimos = new ArrayList<>();
 	
 	//
 	
@@ -101,6 +101,16 @@ public class Cliente implements Serializable {
 
 	public void setIdade(Integer idade) {
 		this.idade = idade;
+	}
+
+	
+	
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
 	}
 
 	@Override

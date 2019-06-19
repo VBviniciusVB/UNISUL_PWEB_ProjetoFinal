@@ -2,6 +2,7 @@ package br.unisul.provafinal.domain;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
@@ -22,10 +23,11 @@ public class EmprestimoPedido implements Serializable {
 	public EmprestimoPedido() {
 	}
 
-	public EmprestimoPedido (Emprestimo emprestimo, Livro livro, Integer quantidade) {
+	public EmprestimoPedido (Emprestimo emprestimo, Livro livro, Cliente cliente, Integer quantidade) {
 		super();
 		id.setEmprestimo(emprestimo);
 		id.setLivro(livro);
+		id.setCliente(cliente);
 		this.quantidade = quantidade;
 	}
 
@@ -48,6 +50,14 @@ public class EmprestimoPedido implements Serializable {
 		return id.getLivro();
 	}
 	
+    public void setCliente(Cliente cliente) {
+		id.setCliente(cliente);
+	}
+
+	public Cliente getCliente() {
+		return id.getCliente();
+	}
+	
 	//
 	
     public EmprestimoPedidoPK getId() {
@@ -67,7 +77,6 @@ public class EmprestimoPedido implements Serializable {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -93,4 +102,19 @@ public class EmprestimoPedido implements Serializable {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(", Livro: ");
+		builder.append(getLivro().getNome());
+		builder.append(", Cliente: ");
+		builder.append(getCliente().getNome());
+		builder.append(", Quantidade: ");
+		builder.append(getQuantidade());
+		builder.append("\n");
+		return builder.toString();
+	}
+	
+	
 }

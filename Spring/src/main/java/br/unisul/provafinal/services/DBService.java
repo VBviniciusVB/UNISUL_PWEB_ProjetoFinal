@@ -50,13 +50,13 @@ public class DBService {
 		
 		Emprestimo ped1 = new Emprestimo(null, cliente4, livro1, sdf.parse("06/07/2015 10:32"), sdf.parse("13/07/2015 10:32"));
 		Emprestimo ped2 = new Emprestimo(null, cliente3, livro3, sdf.parse("09/07/2015 16:19"), sdf.parse("19/07/2015 16:19"));
-		//cliente4.getEmprestimos().addAll(Arrays.asList(ped1));
-		//cliente3.getEmprestimos().addAll(Arrays.asList(ped2));
+		cliente4.getEmprestimos().addAll(Arrays.asList(ped1));
+		cliente3.getEmprestimos().addAll(Arrays.asList(ped2));
 		
 		EmprestimoRepository.saveAll(Arrays.asList(ped1, ped2));
 		
-		EmprestimoPedido ip1 = new EmprestimoPedido(ped1, livro1, 1);
-		EmprestimoPedido ip2 = new EmprestimoPedido(ped2, livro3, 1);
+		EmprestimoPedido ip1 = new EmprestimoPedido(ped1, livro2, cliente4, 1);
+		EmprestimoPedido ip2 = new EmprestimoPedido(ped2, livro1, cliente1, 1);
 		
 		ped1.getItens().addAll(Arrays.asList(ip1));
 		ped2.getItens().addAll(Arrays.asList(ip2));

@@ -43,9 +43,9 @@ public class Livro implements Serializable {
 	
 	// Fim das variáveis
 
-	//@JsonIgnore
-	//@OneToMany(mappedBy="livro")
-	//private List<Emprestimo> emprestimos = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(mappedBy="livro")
+	private List<Emprestimo> emprestimos = new ArrayList<>();
 	
 	//
 	
@@ -103,6 +103,16 @@ public class Livro implements Serializable {
 
 	public void setLocal(String local) {
 		this.local = local;
+	}
+	
+	
+
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
 	}
 
 	@Override

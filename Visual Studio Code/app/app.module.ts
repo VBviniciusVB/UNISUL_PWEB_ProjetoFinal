@@ -17,17 +17,21 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DropdownModule} from 'primeng/dropdown';
 import {SpinnerModule} from 'primeng/spinner';
 import {InputMaskModule} from 'primeng/inputmask';
-
-
+import {PickListModule} from 'primeng/picklist';
 
 import { ClientesOpcoesComponent } from './clientes/clientes-opcoes/clientes-opcoes.component';
 import { ClientesModule } from './clientes/clientes.module';
+
 import { LivrosOpcoesComponent } from './livros/livros-opcoes/livros-opcoes.component';
 import { LivrosModule } from './livros/livros.module';
+
+import { EmprestimosOpcoesComponent } from './emprestimos/emprestimos-opcoes/emprestimos-opcoes.component';
+import { EmprestimosModule } from './emprestimos/emprestimos.module';
 
 const rotas: Routes = [
   {path: 'clientes', component: ClientesOpcoesComponent},
   {path: 'livros', component: LivrosOpcoesComponent},
+  {path: 'emprestimos', component: EmprestimosOpcoesComponent},
 
 ];
 
@@ -44,15 +48,17 @@ const rotas: Routes = [
     RouterModule.forRoot(rotas),
     ContextMenuModule,
     ToolbarModule,
-    ClientesModule,
-    LivrosModule,
     TabViewModule,
     PanelModule,
     RadioButtonModule,
     ConfirmDialogModule,
     DropdownModule,
     SpinnerModule,
-    InputMaskModule
+    InputMaskModule,
+    PickListModule,
+    ClientesModule,
+    LivrosModule,
+    EmprestimosModule,
 
   ],
   providers: [
