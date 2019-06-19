@@ -1,4 +1,3 @@
-# ProjetoFinal_Vinicius
-Projeto final contendo os código do SPRING e VSC
+Ignore o ProjetoFinal_Vinicius, não consegui remover ele
 
 Veja o mais recente dentro desta pasta
