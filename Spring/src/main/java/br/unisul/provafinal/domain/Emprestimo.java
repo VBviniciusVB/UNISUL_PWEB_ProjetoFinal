@@ -31,11 +31,9 @@ public class Emprestimo implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date dataemprestimo;
+	private String dataemprestimo;
 	
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date datadevolucao;
+	private String datadevolucao;
 
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
@@ -52,7 +50,7 @@ public class Emprestimo implements Serializable {
 	public Emprestimo() {
 	}
 
-	public Emprestimo(Integer id, Cliente cliente, Livro livro, Date dataemprestimo, Date datadevolucao) {
+	public Emprestimo(Integer id, Cliente cliente, Livro livro, String dataemprestimo, String datadevolucao) {
 		super();
 		this.id = id;
 		this.livro = livro;
@@ -69,21 +67,19 @@ public class Emprestimo implements Serializable {
 		this.itens = itens;
 	}
 	
-	
-	
-	public Date getDataemprestimo() {
+	public String getDataemprestimo() {
 		return dataemprestimo;
 	}
 
-	public void setDataemprestimo(Date dataemprestimo) {
+	public void setDataemprestimo(String dataemprestimo) {
 		this.dataemprestimo = dataemprestimo;
 	}
 
-	public Date getDatadevolucao() {
+	public String getDatadevolucao() {
 		return datadevolucao;
 	}
 
-	public void setDatadevolucao(Date datadevolucao) {
+	public void setDatadevolucao(String datadevolucao) {
 		this.datadevolucao = datadevolucao;
 	}
 

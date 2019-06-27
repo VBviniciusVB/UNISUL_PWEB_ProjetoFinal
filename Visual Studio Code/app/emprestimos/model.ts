@@ -1,7 +1,7 @@
 export class Emprestimo{
   id: number;
-  livro: string;
-  cliente: string;
+  livro: number;
+  cliente: number;
   dataemprestimo: Date;
   datadevolucao: Date;
 }

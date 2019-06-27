@@ -46,10 +46,9 @@ public class DBService {
 		
 		clienteRepository.saveAll(Arrays.asList(cliente1,cliente2,cliente3,cliente4));
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
-		Emprestimo ped1 = new Emprestimo(null, cliente4, livro1, sdf.parse("06/07/2015 10:32"), sdf.parse("13/07/2015 10:32"));
-		Emprestimo ped2 = new Emprestimo(null, cliente3, livro3, sdf.parse("09/07/2015 16:19"), sdf.parse("19/07/2015 16:19"));
+		Emprestimo ped1 = new Emprestimo(null, cliente4, livro1,"06/07/2015","13/07/2015");
+		Emprestimo ped2 = new Emprestimo(null, cliente3, livro3,"09/07/2015","19/07/2015");
 		cliente4.getEmprestimos().addAll(Arrays.asList(ped1));
 		cliente3.getEmprestimos().addAll(Arrays.asList(ped2));
 		

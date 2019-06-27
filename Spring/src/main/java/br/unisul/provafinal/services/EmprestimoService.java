@@ -23,7 +23,7 @@ public class EmprestimoService {
 	private EmprestimoRepository repo;
 	
 	@Autowired
-	private EmprestimoRepository emprestimoPedidoRepository;
+	private EmprestimoPedidoRepository emprestimoPedidoRepository;
 	
 	@Autowired
 	private LivroService livroService;
@@ -39,7 +39,7 @@ public class EmprestimoService {
 	
 	public Emprestimo insert(Emprestimo obj) {
 		obj.setId(null);
-		obj.setDataemprestimo(new Date());
+//setar data
 		obj.setLivro(livroService.find(obj.getLivro().getId()));
 		obj = repo.save(obj);
 		
@@ -49,6 +49,11 @@ public class EmprestimoService {
 		}
 		emprestimoPedidoRepository.saveAll(obj.getItens());
 		return obj;
+	}
+	
+	//LISTAR TODAS
+	public List<Emprestimo> findAll(){
+		return repo.findAll();
 	}
 	
 	public List<Emprestimo> findByCliente(Integer idCliente) {

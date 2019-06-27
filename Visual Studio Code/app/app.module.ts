@@ -18,6 +18,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {SpinnerModule} from 'primeng/spinner';
 import {InputMaskModule} from 'primeng/inputmask';
 import {PickListModule} from 'primeng/picklist';
+import {CalendarModule} from 'primeng/calendar';
 
 import { ClientesOpcoesComponent } from './clientes/clientes-opcoes/clientes-opcoes.component';
 import { ClientesModule } from './clientes/clientes.module';
@@ -59,6 +60,7 @@ const rotas: Routes = [
     ClientesModule,
     LivrosModule,
     EmprestimosModule,
+    CalendarModule
 
   ],
   providers: [

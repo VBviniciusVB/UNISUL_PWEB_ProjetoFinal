@@ -54,8 +54,8 @@
                              <ng-template pTemplate="body" let-emp>
                                 <tr>
                                   <td class="col-id">{{emp.id}}</td>
-                                  <td>{{emp.livro}}</td>
-                                  <td>{{emp.cliente}}</td>
+                                  <td>{{emp.livro.nome}}</td>
+                                  <td>{{emp.cliente.nome}}</td>
                                   <td>{{emp.dataemprestimo}}</td>
                                   <td>{{emp.datadevolucao}}</td>
                                   <td class="col-acoes">
@@ -83,13 +83,7 @@
 
                                 <label>Cliente :</label>
 
-                                <input pInputText type="text" name="emprestimo"
-                                  [(ngModel)]="emprestimo.cliente"
-                                  pattern="[a-zA-Z ]+"
-                                  #nome="ngModel">
 
-                                <div *ngIf="nome.hasError('required') && nome.touched">Qual o nome do cliente ?</div>
-                                <div *ngIf="nome.hasError('pattern')" >A nome só pode conter letras</div>
 
                                 <label>Livro :</label>
 
@@ -104,15 +98,18 @@
                                   </ng-template>
                               </p-pickList>
 
-                                <label>Data de Aquisição :</label>
 
-                                <input pInputText type="text" name="emprestimo"
-                                [(ngModel)]="emprestimo.dataemprestimo">
+                                <div class="ui-g-12 ui-md-8">
+                                  <label>Data de Aquisição :</label>
+                                  <p-calendar [(ngModel)]="emprestimo.dataemprestimo" name="dataemprestimo" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+                                </div>
 
-                                <label>Data máxima para Devolução :</label>
 
-                                <input pInputText type="text" name="emprestimo"
-                                [(ngModel)]="emprestimo.datadevolucao">
+                                <div class="ui-g-12 ui-md-8">
+                                  <label>Data máxima para Devolução :</label>
+                                  <p-calendar [(ngModel)]="emprestimo.datadevolucao" name="datadevolucao" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+                                </div>
+
 
                             </div>
                             <div class="ui-g-12">
