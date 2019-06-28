@@ -1,21 +1,20 @@
-<p-contextMenu [global]="true" [model]="items1"></p-contextMenu>
-
-<p-contextMenu [target]="img" [model]="items2"></p-contextMenu>
-
-
-
-<p-toolbar>
-  <div class="ui-toolbar-group-left" >
-    <img #img src="assets/logo.png" alt="Logo" class="LogoImage" >
-    <button pButton type="button"  label="Livros" icon="pi pi-search" routerLink="/livros" class="LogoButton"></button>
-    <button pButton type="button" label=" Clientes " icon="pi pi-user-plus" routerLink="/clientes" class="LogoButton"></button>
-    <button pButton type="button" label=" Empréstimos " icon="pi pi-tags" routerLink="/emprestimos" class="LogoButton"></button>
+<!--
+  <app-categorias-cadastro></app-categorias-cadastro>
+  <app-categorias-pesquisa></app-categorias-pesquisa>
+  <app-cidades-cadastro></app-cidades-cadastro>
+-->
+<p-sidebar [(visible)]="sideBar">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-fluid">
+      <h1 class="boxButton">Menu</h1>
+      <button type="button" (click)="sideBar = false" pButton label="Cidades" routerLink="/cidades" class="boxButton"></button>
+      <button type="button" (click)="sideBar = false" pButton label="Categorias" routerLink="/categorias" class="boxButton"></button>
+      <button type="button" (click)="sideBar = false" pButton label="Produtos" routerLink="/produtos" class="boxButton"></button>
+    </div>
   </div>
-  <div class="ui-toolbar-group-right" >
-    <button pButton type="button" [disabled]="true" label="Login" icon="pi pi-key" class="ui-button-danger" class="LogoButton"></button>
-  </div>
-</p-toolbar>
-
+</p-sidebar>
+<button type="button" (click)="sideBar = true"
+pButton icon="pi pi-bars" class="boxButton"></button>
 
 
 <router-outlet></router-outlet>

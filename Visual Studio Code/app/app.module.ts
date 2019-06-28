@@ -1,39 +1,30 @@
+import { ProdutosModule } from './produtos/produtos.module';
+import { ProdutosCadastroComponent } from './produtos/produtos-cadastro/produtos-cadastro.component';
+import { CidadesModule } from './cidades/cidades.module';
+import { CidadesCadastroComponent } from './cidades/cidades-cadastro/cidades-cadastro.component';
+import { ButtonModule } from 'primeng/button';
+import { CategoriasCadastroComponent } from './categorias/categorias-cadastro/categorias-cadastro.component';
+import { CategoriasPesquisaComponent } from './categorias/categorias-pesquisa/categorias-pesquisa.component';
+import { CategoriasModule } from './categorias/categorias.module';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ButtonModule } from 'primeng/button';
-import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { ConfirmationService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
-import {ContextMenuModule} from 'primeng/contextmenu';
-import {ToolbarModule} from 'primeng/toolbar';
-import {TabViewModule} from 'primeng/tabview';
-import {PanelModule} from 'primeng/panel';
-import {RadioButtonModule} from 'primeng/radiobutton';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {DropdownModule} from 'primeng/dropdown';
-import {SpinnerModule} from 'primeng/spinner';
-import {InputMaskModule} from 'primeng/inputmask';
-import {PickListModule} from 'primeng/picklist';
-import {CalendarModule} from 'primeng/calendar';
+import { AppComponent } from './app.component';
+import { ConfirmationService } from 'primeng/api';
+import { SidebarModule } from 'primeng/sidebar';
 
-import { ClientesOpcoesComponent } from './clientes/clientes-opcoes/clientes-opcoes.component';
-import { ClientesModule } from './clientes/clientes.module';
-
-import { LivrosOpcoesComponent } from './livros/livros-opcoes/livros-opcoes.component';
-import { LivrosModule } from './livros/livros.module';
-
-import { EmprestimosOpcoesComponent } from './emprestimos/emprestimos-opcoes/emprestimos-opcoes.component';
-import { EmprestimosModule } from './emprestimos/emprestimos.module';
+import {Routes, RouterModule} from '@angular/router';
 
 const rotas: Routes = [
-  {path: 'clientes', component: ClientesOpcoesComponent},
-  {path: 'livros', component: LivrosOpcoesComponent},
-  {path: 'emprestimos', component: EmprestimosOpcoesComponent},
-
+  {path: '', redirectTo:'categorias', pathMatch:'full'},
+  {path: 'cidades', component: CidadesCadastroComponent},
+  {path: 'produtos', component:ProdutosCadastroComponent},
+  {path: 'categorias', component: CategoriasPesquisaComponent},
+  {path: 'categorias/novo', component: CategoriasCadastroComponent},
+  {path: 'categorias/:id', component: CategoriasCadastroComponent}
 ];
 
 @NgModule({
@@ -43,25 +34,13 @@ const rotas: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    CategoriasModule,
+    CidadesModule,
+    ProdutosModule,
     HttpClientModule,
+    SidebarModule,
     ButtonModule,
-    RouterModule.forRoot(rotas),
-    ContextMenuModule,
-    ToolbarModule,
-    TabViewModule,
-    PanelModule,
-    RadioButtonModule,
-    ConfirmDialogModule,
-    DropdownModule,
-    SpinnerModule,
-    InputMaskModule,
-    PickListModule,
-    ClientesModule,
-    LivrosModule,
-    EmprestimosModule,
-    CalendarModule
-
+    RouterModule.forRoot(rotas)
   ],
   providers: [
     ConfirmationService

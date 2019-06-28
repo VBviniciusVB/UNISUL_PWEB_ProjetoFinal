@@ -1,28 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CategoriasPesquisaComponent } from './categorias-pesquisa/categorias-pesquisa.component';
+import { CategoriasCadastroComponent } from './categorias-cadastro/categorias-cadastro.component';
 
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {TooltipModule} from 'primeng/tooltip';
 import {TableModule} from 'primeng/table';
-import { LivrosService } from './livros.service';
+import { CategoriasService } from './categorias.service';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {TabViewModule} from 'primeng/tabview';
-import {PanelModule} from 'primeng/panel';
-import {DropdownModule} from 'primeng/dropdown';
-import {SpinnerModule} from 'primeng/spinner';
-import {InputMaskModule} from 'primeng/inputmask';
-
 
 import { RouterModule } from '@angular/router';
 
-import { LivrosOpcoesComponent } from './livros-opcoes/livros-opcoes.component';
-
 @NgModule({
-  declarations: [LivrosOpcoesComponent],
+  declarations: [CategoriasPesquisaComponent, CategoriasCadastroComponent],
   imports: [
     CommonModule,
     InputTextModule,
@@ -32,19 +26,15 @@ import { LivrosOpcoesComponent } from './livros-opcoes/livros-opcoes.component';
     ToastModule,
     FormsModule,
     ConfirmDialogModule,
-    RouterModule,
-    TabViewModule,
-    PanelModule,
-    DropdownModule,
-    SpinnerModule,
-    InputMaskModule
+    RouterModule
   ],
   exports:[
-    LivrosOpcoesComponent
+    CategoriasPesquisaComponent,
+    CategoriasCadastroComponent
   ],
   providers: [
-    LivrosService,
+    CategoriasService,
     MessageService
   ]
 })
-export class LivrosModule { }
+export class CategoriasModule { }
