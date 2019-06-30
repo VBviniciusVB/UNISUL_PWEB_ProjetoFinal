@@ -14,8 +14,8 @@ import br.unisul.provafinal.domain.Livro;
 
 @Repository
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Integer> {
+	
 	@Transactional(readOnly=true)
 	List<Emprestimo> findByCliente(Cliente cliente);
-
 
 }

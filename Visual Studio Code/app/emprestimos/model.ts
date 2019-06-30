@@ -2,8 +2,8 @@ export class Emprestimo{
   id: number;
   livros: Livro[] = [];
   clientes: Cliente[] = [];
-  dataemprestimo: Date;
-  datadevolucao: Date;
+  dataemprestimo: String;
+  datadevolucao: String;
 }
 
 export class Livro{

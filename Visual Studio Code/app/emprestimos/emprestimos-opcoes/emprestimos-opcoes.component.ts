@@ -1,7 +1,6 @@
-import { Livro } from './../model';
 import { Cliente } from './../../clientes/model';
-import { Emprestimo } from '../model';
-import { Component, OnInit } from '@angular/core';
+import { Emprestimo} from './../model';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { EmprestimosService } from '../emprestimos.service';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { FormControl } from '@angular/forms';
@@ -16,8 +15,8 @@ export class EmprestimosOpcoesComponent implements OnInit {
 
   emprestimo = new Emprestimo();
   emprestimos: Emprestimo[];
+  cliente = new Cliente();
   clientes: Cliente[];
-  livros: Livro[];
 
 
   index: number = 0;
@@ -32,6 +31,8 @@ export class EmprestimosOpcoesComponent implements OnInit {
     private conf: ConfirmationService
     //private rotaP: Router
   ) {}
+
+
 
   ngOnInit() {
     this.pesquisar();

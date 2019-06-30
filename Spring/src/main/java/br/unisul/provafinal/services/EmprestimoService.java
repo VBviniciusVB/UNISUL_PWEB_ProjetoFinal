@@ -23,6 +23,12 @@ public class EmprestimoService {
 	private EmprestimoRepository repo;
 	
 	@Autowired
+	private ClienteRepository repocliente;
+	
+	@Autowired
+	private LivroRepository repolivro;
+	
+	@Autowired
 	private EmprestimoPedidoRepository emprestimoPedidoRepository;
 	
 	@Autowired
@@ -31,7 +37,6 @@ public class EmprestimoService {
 	@Autowired
 	private ClienteService clienteService;
 	
-
 	public Emprestimo buscar(Integer id) {
 		Optional<Emprestimo> obj = repo.findById(id);
 		return obj.orElse(null);
@@ -39,7 +44,7 @@ public class EmprestimoService {
 	
 	public Emprestimo insert(Emprestimo obj) {
 		obj.setId(null);
-//setar data
+		//setar data
 		obj.setLivro(livroService.find(obj.getLivro().getId()));
 		obj = repo.save(obj);
 		
@@ -60,5 +65,8 @@ public class EmprestimoService {
 		Cliente cliente = clienteService.find(idCliente);
 		return repo.findByCliente(cliente);
 	}
+
+
+	
 
 }

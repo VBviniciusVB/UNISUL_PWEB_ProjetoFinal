@@ -28,7 +28,7 @@ public class EmprestimoResource {
 
 	//Buscar por ID
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Emprestimo> find(@PathVariable Integer id) {
+	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Emprestimo obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -54,4 +54,11 @@ public class EmprestimoResource {
 				return ResponseEntity.ok().body(listaDTO);
 			}
 
+	
+	
+	@RequestMapping(value="/{clienteId}/cliente",method=RequestMethod.GET)
+	ResponseEntity<List<Emprestimo>> findByCliente(@PathVariable Integer clienteId) {
+		List<Emprestimo> list = service.findByCliente(clienteId);
+		return ResponseEntity.ok().body(list);
+	}
 }

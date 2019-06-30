@@ -83,26 +83,17 @@
 
                               <label>Cliente :</label>
 
-                              <p-pickList [source]="clientes" [target]="emprestimo.clientes"
-                              sourceHeader="Clientes" targetHeader="Selecionadas"
-                              [responsive]="true"  [dragdrop]="true"
-                              [showSourceControls]="false" [showTargetControls]="false">
-                                <ng-template let-cli pTemplate="item">
-                                    <div class="ui-helper-clearfix">
-                                        <div style="font-size:12px;float:right;margin:5px 5px 0 0">{{cli.nome}}</div>
-                                    </div>
-                                </ng-template>
-                              </p-pickList>
+                              <p-dropdown [options]="clientes" name="clientes" [(ngModel)]="item" placeholder="Selecione um Cliente" [virtualScroll]="true" [itemSize]="31" [filter]="false"></p-dropdown>
 
                               <label>Livro :</label>
 
-                                 <p-pickList [source]="livros" [target]="emprestimo.livros"
-                                sourceHeader="Livros" targetHeader="Selecionadas"
+                                 <p-pickList [source]="clientes" [target]="emprestimo.clientes"
+                                sourceHeader="Clientes" targetHeader="Selecionadas"
                                 [responsive]="true"  [dragdrop]="true"
                                 [showSourceControls]="false" [showTargetControls]="false">
-                                  <ng-template let-cat pTemplate="item">
+                                  <ng-template let-cli pTemplate="item">
                                       <div class="ui-helper-clearfix">
-                                          <div style="font-size:12px;float:right;margin:5px 5px 0 0">{{liv.nome}}</div>
+                                          <div style="font-size:12px;float:right;margin:5px 5px 0 0">{{cli.nome}}</div>
                                       </div>
                                   </ng-template>
                                 </p-pickList>

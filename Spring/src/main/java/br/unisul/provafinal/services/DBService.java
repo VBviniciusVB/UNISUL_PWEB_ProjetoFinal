@@ -54,8 +54,8 @@ public class DBService {
 		
 		EmprestimoRepository.saveAll(Arrays.asList(ped1, ped2));
 		
-		EmprestimoPedido ip1 = new EmprestimoPedido(ped1, livro2, cliente4, 1);
-		EmprestimoPedido ip2 = new EmprestimoPedido(ped2, livro1, cliente1, 1);
+		EmprestimoPedido ip1 = new EmprestimoPedido(ped1, livro1, cliente4, 1);
+		EmprestimoPedido ip2 = new EmprestimoPedido(ped2, livro3, cliente3, 1);
 		
 		ped1.getItens().addAll(Arrays.asList(ip1));
 		ped2.getItens().addAll(Arrays.asList(ip2));
