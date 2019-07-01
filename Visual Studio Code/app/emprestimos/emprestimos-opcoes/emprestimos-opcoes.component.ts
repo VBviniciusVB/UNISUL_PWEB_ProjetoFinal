@@ -1,11 +1,13 @@
-import { Livro } from './../model';
 import { Cliente } from './../../clientes/model';
-import { Emprestimo } from '../model';
-import { Component, OnInit } from '@angular/core';
+import { Livro } from './../../livros/model';
+import { Emprestimo} from './../model';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { EmprestimosService } from '../emprestimos.service';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ClientesService } from '../../clientes/clientes.service';
+import { LivrosService } from '../../livros/livros.service';
 
 @Component({
   selector: 'app-emprestimos-opcoes',
@@ -16,8 +18,12 @@ export class EmprestimosOpcoesComponent implements OnInit {
 
   emprestimo = new Emprestimo();
   emprestimos: Emprestimo[];
+
+  //pega valores pro combo box
   clientes: Cliente[];
   livros: Livro[];
+
+  livros2 = new Livro();
 
 
   index: number = 0;
@@ -29,18 +35,35 @@ export class EmprestimosOpcoesComponent implements OnInit {
     private service: EmprestimosService,
     private messageService: MessageService,
     private rota: ActivatedRoute,
-    private conf: ConfirmationService
+    private conf: ConfirmationService,
+    private clienteService: ClientesService,
+    private livroService: LivrosService
+
     //private rotaP: Router
   ) {}
 
+
+
   ngOnInit() {
+
     this.pesquisar();
-  }
+
+    this.clienteService.pesquisar('').then((dados) => {
+    this.clientes = dados.map((emprestimo) => ({label: emprestimo.nome, value: emprestimo.id}));
+    });
+
+
+    this.livroService.pesquisar('').then((dados) => {
+    this.livros = dados.map((emprestimo) => ({label: emprestimo.nome, value: emprestimo.id}));
+    });
+
+  };
+
+
 
   inserir(form: FormControl) {
-    this.service.adicionar(this.emprestimo)
-    .then( ()=>{
-
+    this.service.adicionar(this.emprestimo).then( ()=>{
+      this.messageService.add({severity:'success', summary:'Inserção Concluida', detail:'O Emprestimo '+this.emprestimo.id+' foi adicionado'});
     });
   }
 

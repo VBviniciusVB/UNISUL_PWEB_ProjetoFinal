@@ -10,12 +10,9 @@
 </div>
 
 <div class="ui-g">
-    <div class="ui-g-10">
+    <div class="ui-g-12">
         <p-tabView class= "Table" (onChange)="onTabChange($event)"  [activeIndex]="index">
             <p-tabPanel header="Procurar Cliente :" leftIcon="pi pi-search"  >
-
-
-
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
                         <div class="ui-g">
@@ -31,8 +28,6 @@
                         </div>
                     </form>
                 </div>
-
-
 
                 <div class="ui-g">
                     <div class="ui-g-12">
@@ -64,31 +59,25 @@
                         </p-table>
                     </div>
                 </div>
-
-
-
             </p-tabPanel>
+
+
+
             <p-tabPanel header="Cadastrar Cliente" leftIcon="pi pi-plus">
-
-
-
-
                 <div class="container">
-                    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
+                    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
                         <div class="ui-g">
                             <div class="ui-g-12 ui-md-9 ui-fluid">
 
                                 <label>Nome :</label>
                                 <input pInputText type="text" name="nome"
                                   [(ngModel)]="cliente.nome"
-                                  pattern="[a-zA-Z ]+"
+                                  pattern="[a-zA-Z]+"
                                   #nome="ngModel" required minlength="3">
 
                                 <div *ngIf="nome.hasError('required') && nome.touched">Escreva o nome do cliente</div>
                                 <div *ngIf="nome.hasError('pattern')" >O nome só pode conter letras do alfabeto</div>
                                 <div *ngIf="nome.hasError('minlength')" >O nome deve ter no mínimo 3 letras</div>
-
-
 
                                 <label>Tipo :</label>
 
@@ -104,66 +93,26 @@
                                     <div class="ui-g-6"><p-radioButton name="grupo2" [(ngModel)]="cliente.sexo" value="Feminino" label="Feminino" [(ngModel)]="val4" inputId="preopt2"></p-radioButton></div>
                                 </div>
 
-
                                 <label>Idade :</label>
+
                                 <input pInputText type="text" name="idade"
                                   [(ngModel)]="cliente.idade"
-                                  pattern="[0-9 ]+"
-                                  #nome="ngModel">
+                                  pattern="[0-9]+"
+                                  #nome="ngModel" required maxlength="3">
 
                                 <div *ngIf="nome.hasError('required') && nome.touched">Qual a idade da pessoa ?</div>
                                 <div *ngIf="nome.hasError('pattern')" >A idade só pode conter números</div>
-
+                                <div *ngIf="nome.hasError('maxlength')" >Limite máximo de 3 digitos para identificar a idade</div>
 
                             </div>
                             <div class="ui-g-12">
                                 <button pButton type="submit" label="Salvar" [disabled]="f.invalid" ></button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>
-
-
-
             </p-tabPanel>
         </p-tabView>
     </div>
     <div class="ui-g-2"></div>
 </div>
-
-
-
-<!--
-
-<div class="container">
-    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
-        <div class="ui-g">
-
-            <div class="ui-g-12">
-              <h1>{{editando?'Edicao de ': 'Nova '}} Cliente</h1>
-            </div>
-
-            <div class="ui-g-12 ui-md-9 ui-fluid">
-              <label>Descrição</label>
-              <input pInputText type="text" name="nome"
-                [(ngModel)]="cliente.nome"
-                #nome="ngModel" required minlength="3">
-
-                <div *ngIf="nome.hasError('required') && nome.touched">Informe um nome</div>
-                <div *ngIf="nome.hasError('minlength')">O nome deve ter no mínimo 3 caractares</div>
-            </div>
-
-            <div class="ui-g-12">
-                <button pButton type="submit" label="Salvar" [disabled]="f.invalid" class=" boxButton"></button>
-                <button pButton type="button" label="Novo" class="ui-button-info" class=" boxButton" routerLink="/clientes"></button>
-                <a routerLink="/clientes">Voltar para a pesquisa</a>
-            </div>
-
-
-        </div>
-    </form>
-</div>
-
--->

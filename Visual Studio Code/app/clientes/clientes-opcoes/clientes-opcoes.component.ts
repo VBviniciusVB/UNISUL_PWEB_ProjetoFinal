@@ -18,6 +18,8 @@ export class ClientesOpcoesComponent implements OnInit {
   index: number = 0;
   Editar: boolean = true;
 
+  TEST: number = 0;
+
   nomeBusca:string;
 
   constructor(
@@ -36,6 +38,7 @@ export class ClientesOpcoesComponent implements OnInit {
     this.service.adicionar(this.cliente)
     .then( ()=>{
       this.messageService.add({severity:'success', summary:'Inserção Concluida', detail:'O cliente '+this.cliente.nome+' foi adicionado'});
+      form.reset();
     });
   }
 

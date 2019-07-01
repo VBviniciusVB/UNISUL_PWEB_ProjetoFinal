@@ -46,7 +46,7 @@
                                   <th>Nome</th>
                                   <th>Área</th>
                                   <th>Estoque</th>
-                                  <th>Local</th>
+                                  <th>Estante</th>
                                   <th class="col-acoes">Ações</th>
                                 </tr>
                              </ng-template>
@@ -90,7 +90,7 @@
 
                                 <label>Área :</label>
 
-                                <p-dropdown [options]="LivroGroupArea" [(ngModel)]="livro.area" [filter]="true" name="area"></p-dropdown>
+                                <p-dropdown [options]="LivroGroupArea" [(ngModel)]="livro.area" name="area"></p-dropdown>
 
                                 <label>Estoque :</label>
 
@@ -98,9 +98,17 @@
 
                                 <label>Local :</label><br />
 
-                                <label>Estante - Platileira - Número</label>
+                                <label>Estante</label>
 
-                                <p-inputMask [(ngModel)]="livro.local" name="local" mask="99-9-99"></p-inputMask>
+                                <input pInputText type="text" name="local"
+                                  [(ngModel)]="livro.local"
+                                  pattern="[0-9]+"
+                                  #nome="ngModel" required maxlength="3">
+
+                                <div *ngIf="nome.hasError('required') && nome.touched">Escreva o número da estante</div>
+                                <div *ngIf="nome.hasError('pattern')" >A estante só aceita números</div>
+                                <div *ngIf="nome.hasError('maxlength')" >Limite máximo de 3 digitos para identificar a estante</div>
+
 
                             </div>
                             <div class="ui-g-12">

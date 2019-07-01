@@ -36,7 +36,6 @@ public class Livro implements Serializable {
 	// 5 - Localização na Biblioteca
 	
 	private String nome;
-
 	private String area;
 	private Integer estoque;
 	private String local;

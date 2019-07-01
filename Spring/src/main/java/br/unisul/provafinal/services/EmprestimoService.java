@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.unisul.provafinal.domain.Cliente;
 import br.unisul.provafinal.domain.Emprestimo;
-import br.unisul.provafinal.domain.EmprestimoPedido;
 import br.unisul.provafinal.domain.Livro;
 import br.unisul.provafinal.repositories.ClienteRepository;
-import br.unisul.provafinal.repositories.EmprestimoPedidoRepository;
 import br.unisul.provafinal.repositories.EmprestimoRepository;
 import br.unisul.provafinal.repositories.LivroRepository;
 
@@ -23,7 +23,11 @@ public class EmprestimoService {
 	private EmprestimoRepository repo;
 	
 	@Autowired
-	private EmprestimoPedidoRepository emprestimoPedidoRepository;
+	private ClienteRepository repocliente;
+	
+	@Autowired
+	private LivroRepository repolivro;
+	
 	
 	@Autowired
 	private LivroService livroService;
@@ -37,18 +41,29 @@ public class EmprestimoService {
 		return obj.orElse(null);
 	}
 	
+
+	public List<Emprestimo> findByCliente(Integer clienteId) {
+		return repo.findEmprestimos(clienteId);
+	}
+	
+
+	
 	public Emprestimo insert(Emprestimo obj) {
 		obj.setId(null);
-//setar data
+		//obj.setCliente(clienteService.find(1));
+		//JOptionPane.showMessageDialog(null, "##############Teste"+clienteService.find(obj.getCliente().getId()));
+		obj.setCliente(clienteService.find(obj.getCliente().getId()));
+		//
 		obj.setLivro(livroService.find(obj.getLivro().getId()));
-		obj = repo.save(obj);
+		//obj.getDatadevolucao();
+		//obj.getDataemprestimo();
 		
-		for (EmprestimoPedido ip : obj.getItens()) {
-			ip.setCliente(clienteService.find(ip.getCliente().getId()));
-			ip.setEmprestimo(obj);
-		}
-		emprestimoPedidoRepository.saveAll(obj.getItens());
+		//emprestimoPedidoRepository.saveAll(obj.getItens());
+		
+		obj = repo.save(obj);
 		return obj;
+		
+		//return obj;
 	}
 	
 	//LISTAR TODAS
@@ -56,9 +71,8 @@ public class EmprestimoService {
 		return repo.findAll();
 	}
 	
-	public List<Emprestimo> findByCliente(Integer idCliente) {
-		Cliente cliente = clienteService.find(idCliente);
-		return repo.findByCliente(cliente);
-	}
+
+
+	
 
 }

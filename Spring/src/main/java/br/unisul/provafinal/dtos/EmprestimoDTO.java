@@ -16,13 +16,13 @@ public class EmprestimoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
+	
 	@NotEmpty(message="Preenchimento obrigatório")
-	@Email(message="Deve ter um cliente para ter um empresitmo")
+	@Length(message="É preciso ter um cliente")
 	private Cliente cliente;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
-	@Email(message="Deve ter um livro para ter um empresitmo")
+	@Length(message="É preciso ter um livro")
 	private Livro livro;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
@@ -50,6 +50,22 @@ public class EmprestimoDTO implements Serializable {
 		this.id = id;
 	}
 
+	public String getDataemprestimo() {
+		return dataemprestimo;
+	}
+
+	public void setDataemprestimo(String dataemprestimo) {
+		this.dataemprestimo = dataemprestimo;
+	}
+
+	public String getDatadevolucao() {
+		return datadevolucao;
+	}
+
+	public void setDatadevolucao(String datadevolucao) {
+		this.datadevolucao = datadevolucao;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -66,21 +82,6 @@ public class EmprestimoDTO implements Serializable {
 		this.livro = livro;
 	}
 
-	public String getDataemprestimo() {
-		return dataemprestimo;
-	}
-
-	public void setDataemprestimo(String dataemprestimo) {
-		this.dataemprestimo = dataemprestimo;
-	}
-
-	public String getDatadevolucao() {
-		return datadevolucao;
-	}
-
-	public void setDatadevolucao(String datadevolucao) {
-		this.datadevolucao = datadevolucao;
-	}
 
 
 

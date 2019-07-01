@@ -21,8 +21,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.unisul.provafinal.domain.Cliente;
-import br.unisul.provafinal.domain.EmprestimoPedido;
-
 @Entity
 public class Emprestimo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -43,8 +41,8 @@ public class Emprestimo implements Serializable {
 	@JoinColumn(name="livro_id")
 	private Livro livro;
 	
-	@OneToMany(mappedBy="id.emprestimo")
-	private Set<EmprestimoPedido> itens = new HashSet<>();
+	//@OneToMany(mappedBy="id.emprestimo")
+	//private Set<EmprestimoPedido> itens = new HashSet<>();
 
 	
 	public Emprestimo() {
@@ -53,19 +51,12 @@ public class Emprestimo implements Serializable {
 	public Emprestimo(Integer id, Cliente cliente, Livro livro, String dataemprestimo, String datadevolucao) {
 		super();
 		this.id = id;
-		this.livro = livro;
 		this.cliente = cliente;
+		this.livro = livro;
 		this.dataemprestimo = dataemprestimo;
 		this.datadevolucao = datadevolucao;
 	}
-	
-	public Set<EmprestimoPedido> getItens() {
-		return itens;
-	}
 
-	public void setItens(Set<EmprestimoPedido> itens) {
-		this.itens = itens;
-	}
 	
 	public String getDataemprestimo() {
 		return dataemprestimo;
@@ -132,18 +123,18 @@ public class Emprestimo implements Serializable {
 		return true;
 	}
 	
-	@Override
-	public String toString() {
-		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		StringBuilder builder = new StringBuilder();
-		builder.append("Pedido número: ");
-		builder.append(getId());
-		builder.append(", Dia de Retirada: ");
-		builder.append(sdf.format(getDataemprestimo()));
-		builder.append(", Cliente: ");
-		builder.append(getCliente().getNome());
-		return builder.toString();
-	}
+//	@Override
+//	public String toString() {
+//		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//		StringBuilder builder = new StringBuilder();
+//		builder.append("Pedido número: ");
+//		builder.append(getId());
+//		builder.append(", Dia de Retirada: ");
+//		builder.append(sdf.format(getDataemprestimo()));
+//		builder.append(", Cliente: ");
+//		builder.append(getCliente().getNome());
+//		return builder.toString();
+//	}
 	
 }

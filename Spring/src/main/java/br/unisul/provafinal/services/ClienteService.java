@@ -43,10 +43,13 @@ public class ClienteService {
 		public List<Cliente> findAll(){
 			return rep.findAll();
 		}
+
 		
 		//BUSCAR POR NOME ((((NOVO))))	
 		public List<Cliente> findByName(String nome){
 			List<Cliente> list = rep.findLikeNome(nome);
 			return list;
 		}
+
+
 }
