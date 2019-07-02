@@ -18,8 +18,6 @@ export class ClientesOpcoesComponent implements OnInit {
   index: number = 0;
   Editar: boolean = true;
 
-  TEST: number = 0;
-
   nomeBusca:string;
 
   constructor(
@@ -100,16 +98,14 @@ export class ClientesOpcoesComponent implements OnInit {
 }
 
   onTabChange(event) {
-   this.index = event.index;
-   this.Editar = true;
-   if (this.index == 0){
-    this.pesquisar();
-   }
-
+    this.index = event.index;
+    this.Editar = true;
+    if (this.index == 0){
+      this.pesquisar();
+    }
   }
 
   editando(){
     return Boolean(this.Editar);
   }
-
 }

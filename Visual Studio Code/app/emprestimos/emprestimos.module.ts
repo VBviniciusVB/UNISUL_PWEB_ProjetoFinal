@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -16,10 +17,6 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {PickListModule} from 'primeng/picklist';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
-
-
-
-import { RouterModule } from '@angular/router';
 
 import { EmprestimosOpcoesComponent } from './emprestimos-opcoes/emprestimos-opcoes.component';
 
@@ -41,7 +38,6 @@ import { EmprestimosOpcoesComponent } from './emprestimos-opcoes/emprestimos-opc
     PickListModule,
     CalendarModule,
     DropdownModule
-
   ],
   exports:[
     EmprestimosOpcoesComponent

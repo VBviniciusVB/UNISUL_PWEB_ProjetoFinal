@@ -12,15 +12,12 @@ export class LivrosService {
 
   constructor(private http: HttpClient) { }
 
-
-
   pesquisar(filtro: any): Promise<any> {
     if(filtro.nome){
       this.urlFiltro = 'http://localhost:8080/livros/busca?nome='+filtro.nome;
     }else{
       this.urlFiltro = 'http://localhost:8080/livros';
     }
-
     return this.http.get<any>(this.urlFiltro).toPromise();
   }
 
@@ -43,5 +40,4 @@ export class LivrosService {
   buscarPorCodigo(codigo: number): Promise<Livro> {
     return this.http.get<Livro>(this.livrosURL+'/'+codigo).toPromise();
   }
-
 }

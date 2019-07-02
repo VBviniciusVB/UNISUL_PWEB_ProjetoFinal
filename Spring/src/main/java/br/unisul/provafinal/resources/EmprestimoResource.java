@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.unisul.provafinal.domain.Cliente;
 import br.unisul.provafinal.domain.Emprestimo;
+import br.unisul.provafinal.domain.Livro;
 import br.unisul.provafinal.dtos.ClienteDTO;
 import br.unisul.provafinal.dtos.EmprestimoDTO;
 import br.unisul.provafinal.resources.utils.URL;
@@ -35,7 +36,7 @@ public class EmprestimoResource {
 	//Buscar por ID
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Emprestimo obj = service.buscar(id);
+		Emprestimo obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -46,6 +47,21 @@ public class EmprestimoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	// ATUALIZAR
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Emprestimo obj, @PathVariable Integer id){
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	//EXCLUIR
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 	//LISTAR TODAS

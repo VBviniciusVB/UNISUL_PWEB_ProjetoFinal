@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
@@ -15,9 +16,6 @@ import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
 import {SpinnerModule} from 'primeng/spinner';
 import {InputMaskModule} from 'primeng/inputmask';
-
-
-import { RouterModule } from '@angular/router';
 
 import { LivrosOpcoesComponent } from './livros-opcoes/livros-opcoes.component';
 

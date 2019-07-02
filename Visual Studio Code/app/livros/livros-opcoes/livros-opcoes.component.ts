@@ -16,8 +16,6 @@ interface Area {
   styleUrls: ['./livros-opcoes.component.css']
 })
 
-
-
 export class LivrosOpcoesComponent implements OnInit {
 
   livro = new Livro();
@@ -25,20 +23,16 @@ export class LivrosOpcoesComponent implements OnInit {
 
   index: number = 0;
   Editar: boolean = true;
+  nomeBusca:string;
+
   LivroGroupArea: SelectItem[];
   LivroSelecionadoArea: Area;
-
-
-  nomeBusca:string;
 
   constructor(
     private service: LivrosService,
     private messageService: MessageService,
-    private rota: ActivatedRoute,
     private conf: ConfirmationService
-    //private rotaP: Router
   ) {
-
     this.LivroGroupArea = [
           {label:'', value:''},
           {label:'Épico', value:'Épico'},
@@ -58,9 +52,7 @@ export class LivrosOpcoesComponent implements OnInit {
           {label:'Tragédia', value:'Tragédia'},
           {label:'Tragicomédia', value:'Tragicomédia'},
           {label:'Farsa', value:'Farsa'}
-  ];
-
-   }
+    ];}
 
   ngOnInit() {
     this.pesquisar();
@@ -136,12 +128,9 @@ export class LivrosOpcoesComponent implements OnInit {
    if (this.index == 0){
     this.pesquisar();
    }
-
   }
 
   editando(){
     return Boolean(this.Editar);
   }
-
-
 }

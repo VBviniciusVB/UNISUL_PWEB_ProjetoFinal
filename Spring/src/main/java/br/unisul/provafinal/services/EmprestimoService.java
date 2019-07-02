@@ -28,24 +28,33 @@ public class EmprestimoService {
 	@Autowired
 	private LivroRepository repolivro;
 	
-	
 	@Autowired
 	private LivroService livroService;
 	
 	@Autowired
-	private ClienteService clienteService;
-	
-
-	public Emprestimo buscar(Integer id) {
-		Optional<Emprestimo> obj = repo.findById(id);
-		return obj.orElse(null);
-	}
-	
+	private ClienteService clienteService;	
 
 	public List<Emprestimo> findByCliente(Integer clienteId) {
 		return repo.findEmprestimos(clienteId);
 	}
 	
+	//BUSCAR POR ID
+	public Emprestimo find (Integer id) {
+		Optional<Emprestimo> obj = repo.findById(id);
+		return obj.orElse(null);
+	}
+	
+	//ATUALIZAR
+	public Emprestimo update (Emprestimo obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
+	
+	//DELETAR
+	public void delete (Integer id) {
+		find(id);
+		repo.deleteById(id);
+	}
 
 	
 	public Emprestimo insert(Emprestimo obj) {

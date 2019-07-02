@@ -1,16 +1,13 @@
 package br.unisul.provafinal.dtos;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import br.unisul.provafinal.domain.Cliente;
 import br.unisul.provafinal.domain.Emprestimo;
 import br.unisul.provafinal.domain.Livro;
-
 
 public class EmprestimoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -81,12 +78,4 @@ public class EmprestimoDTO implements Serializable {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-
-
-
-
-	
-	
-	
-	
 }

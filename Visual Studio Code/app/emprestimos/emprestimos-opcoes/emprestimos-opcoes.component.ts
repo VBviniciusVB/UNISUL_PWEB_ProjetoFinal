@@ -5,7 +5,6 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { EmprestimosService } from '../emprestimos.service';
 import { MessageService, ConfirmationService, SelectItem } from 'primeng/api';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { ClientesService } from '../../clientes/clientes.service';
 import { LivrosService } from '../../livros/livros.service';
 
@@ -16,33 +15,32 @@ import { LivrosService } from '../../livros/livros.service';
 })
 export class EmprestimosOpcoesComponent implements OnInit {
 
+  // Com o NEW ele pega os valores ( Ex: ComboBox )
   emprestimo = new Emprestimo();
+
+  // E esse faz o que ?
   emprestimos: Emprestimo[];
 
-  //pega valores pro combo box
+  // ComboBox
   clientes: Cliente[];
   livros: Livro[];
 
-  livros2 = new Livro();
-
-
+  //Qual aba ele esta (Procurar Cliente , Cadastrar Cliente)
   index: number = 0;
+
+  //Se vai alterar um código ou não ( TRUE = NÃO , FALSE = SIM )
   Editar: boolean = true;
 
-  nomeBusca:string;
+  //Procurar pelo nome dessa variável
+  Procura:string;
 
   constructor(
     private service: EmprestimosService,
     private messageService: MessageService,
-    private rota: ActivatedRoute,
     private conf: ConfirmationService,
     private clienteService: ClientesService,
     private livroService: LivrosService
-
-    //private rotaP: Router
   ) {}
-
-
 
   ngOnInit() {
 
@@ -52,14 +50,11 @@ export class EmprestimosOpcoesComponent implements OnInit {
     this.clientes = dados.map((emprestimo) => ({label: emprestimo.nome, value: emprestimo.id}));
     });
 
-
     this.livroService.pesquisar('').then((dados) => {
     this.livros = dados.map((emprestimo) => ({label: emprestimo.nome, value: emprestimo.id}));
     });
 
   };
-
-
 
   inserir(form: FormControl) {
     this.service.adicionar(this.emprestimo).then( ()=>{
@@ -91,7 +86,7 @@ export class EmprestimosOpcoesComponent implements OnInit {
   }
 
   pesquisar(){
-    this.service.pesquisar({nome:this.nomeBusca})
+    this.service.pesquisar({nome:this.Procura})
     .then((dados)=>{
       this.emprestimos=dados;
     });
@@ -130,11 +125,9 @@ export class EmprestimosOpcoesComponent implements OnInit {
    if (this.index == 0){
     this.pesquisar();
    }
-
   }
 
   editando(){
     return Boolean(this.Editar);
   }
-
 }

@@ -1,26 +1,16 @@
 package br.unisul.provafinal.domain;
 
 import java.io.Serializable;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.unisul.provafinal.domain.Cliente;
+
 @Entity
 public class Emprestimo implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,9 +18,7 @@ public class Emprestimo implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
 	private String dataemprestimo;
-	
 	private String datadevolucao;
 
 	@ManyToOne
@@ -40,10 +28,6 @@ public class Emprestimo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="livro_id")
 	private Livro livro;
-	
-	//@OneToMany(mappedBy="id.emprestimo")
-	//private Set<EmprestimoPedido> itens = new HashSet<>();
-
 	
 	public Emprestimo() {
 	}
@@ -57,7 +41,6 @@ public class Emprestimo implements Serializable {
 		this.datadevolucao = datadevolucao;
 	}
 
-	
 	public String getDataemprestimo() {
 		return dataemprestimo;
 	}
@@ -122,19 +105,4 @@ public class Emprestimo implements Serializable {
 			return false;
 		return true;
 	}
-	
-//	@Override
-//	public String toString() {
-//		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//		StringBuilder builder = new StringBuilder();
-//		builder.append("Pedido número: ");
-//		builder.append(getId());
-//		builder.append(", Dia de Retirada: ");
-//		builder.append(sdf.format(getDataemprestimo()));
-//		builder.append(", Cliente: ");
-//		builder.append(getCliente().getNome());
-//		return builder.toString();
-//	}
-	
 }

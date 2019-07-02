@@ -4,21 +4,15 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <div class="ui-g">
-    <div class="ui-g-10">
-        <h1>  Livros</h1>
-    </div>
-    <div class="ui-g-2">
-
+    <div class="ui-g-12">
+        <h1>Livros</h1>
     </div>
 </div>
 
 <div class="ui-g">
-    <div class="ui-g-10">
+    <div class="ui-g-12">
         <p-tabView class= "Table" (onChange)="onTabChange($event)"  [activeIndex]="index">
             <p-tabPanel header="Procurar Livro :" leftIcon="pi pi-search"  >
-
-
-
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
                         <div class="ui-g">
@@ -29,13 +23,9 @@
                             <div class="ui-g-12">
                                 <button pButton type="submit" label="Pesquisar"></button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>
-
-
 
                 <div class="ui-g">
                     <div class="ui-g-12">
@@ -67,15 +57,9 @@
                         </p-table>
                     </div>
                 </div>
-
-
-
             </p-tabPanel>
+
             <p-tabPanel header="Cadastrar Livro" leftIcon="pi pi-plus">
-
-
-
-
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
                         <div class="ui-g">
@@ -89,17 +73,12 @@
                                 <div *ngIf="nome.hasError('required') && nome.touched">Escreva o nome do livro</div>
 
                                 <label>Área :</label>
-
                                 <p-dropdown [options]="LivroGroupArea" [(ngModel)]="livro.area" name="area"></p-dropdown>
 
                                 <label>Estoque :</label>
-
                                 <p-spinner size="30" [(ngModel)]="livro.estoque" [min]="0" name="estoque"></p-spinner>
 
-                                <label>Local :</label><br />
-
-                                <label>Estante</label>
-
+                                <label>Estante :</label>
                                 <input pInputText type="text" name="local"
                                   [(ngModel)]="livro.local"
                                   pattern="[0-9]+"
@@ -109,56 +88,14 @@
                                 <div *ngIf="nome.hasError('pattern')" >A estante só aceita números</div>
                                 <div *ngIf="nome.hasError('maxlength')" >Limite máximo de 3 digitos para identificar a estante</div>
 
-
                             </div>
                             <div class="ui-g-12">
                                 <button pButton type="submit" label="Salvar" [disabled]="f.invalid" ></button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>
-
-
-
             </p-tabPanel>
         </p-tabView>
     </div>
-    <div class="ui-g-2"></div>
 </div>
-
-
-
-<!--
-
-<div class="container">
-    <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
-        <div class="ui-g">
-
-            <div class="ui-g-12">
-              <h1>{{editando?'Edicao de ': 'Nova '}} Cliente</h1>
-            </div>
-
-            <div class="ui-g-12 ui-md-9 ui-fluid">
-              <label>Descrição</label>
-              <input pInputText type="text" name="nome"
-                [(ngModel)]="cliente.nome"
-                #nome="ngModel" required minlength="3">
-
-                <div *ngIf="nome.hasError('required') && nome.touched">Informe um nome</div>
-                <div *ngIf="nome.hasError('minlength')">O nome deve ter no mínimo 3 caractares</div>
-            </div>
-
-            <div class="ui-g-12">
-                <button pButton type="submit" label="Salvar" [disabled]="f.invalid" class=" boxButton"></button>
-                <button pButton type="button" label="Novo" class="ui-button-info" class=" boxButton" routerLink="/clientes"></button>
-                <a routerLink="/clientes">Voltar para a pesquisa</a>
-            </div>
-
-
-        </div>
-    </form>
-</div>
-
--->

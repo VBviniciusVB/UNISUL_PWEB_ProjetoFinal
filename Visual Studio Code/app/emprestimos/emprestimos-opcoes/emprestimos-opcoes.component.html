@@ -4,38 +4,28 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <div class="ui-g">
-    <div class="ui-g-10">
+    <div class="ui-g-12">
         <h1> Emprestimos</h1>
-    </div>
-    <div class="ui-g-2">
-
     </div>
 </div>
 
 <div class="ui-g">
-    <div class="ui-g-10">
+    <div class="ui-g-12">
         <p-tabView class= "Table" (onChange)="onTabChange($event)"  [activeIndex]="index">
             <p-tabPanel header="Procurar Emprestimo :" leftIcon="pi pi-search"  >
-
-
-
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
                         <div class="ui-g">
                             <div class="ui-g-12 ui-md-9 ui-fluid">
                               <label>Emprestimo :</label>
-                              <input pInputText type="text" name="descricao"  [(ngModel)]="nomeBusca">
+                              <input pInputText type="text" name="descricao"  [(ngModel)]="Procura">
                             </div>
                             <div class="ui-g-12">
                                 <button pButton type="submit" label="Pesquisar"></button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>
-
-
 
                 <div class="ui-g">
                     <div class="ui-g-12">
@@ -67,26 +57,18 @@
                         </p-table>
                     </div>
                 </div>
-
-
-
             </p-tabPanel>
+
             <p-tabPanel header="Cadastrar Emprestimo" leftIcon="pi pi-plus">
-
-
-
-
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
                         <div class="ui-g">
                             <div class="ui-g-12 ui-md-10 ui-fluid">
 
                               <label>Cliente :</label>
-
                               <p-dropdown [options]="clientes" name="cliente" [(ngModel)]="emprestimo.cliente.nome" placeholder="Selecione um Cliente" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
 
                               <label>Livro :</label>
-
                               <p-dropdown [options]="livros" name="livro" [(ngModel)]="emprestimo.livro.nome" placeholder="Selecione um Livro" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
 
                               <!--
@@ -109,27 +91,19 @@
                                   <p-calendar [(ngModel)]="emprestimo.dataemprestimo" name="dataemprestimo" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
                                 </div>
 
-
                                 <div class="ui-g-12 ui-md-8">
                                   <label>Data máxima para Devolução :</label>
                                   <p-calendar [(ngModel)]="emprestimo.datadevolucao" name="datadevolucao" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
                                 </div>
 
-
                             </div>
                             <div class="ui-g-12">
                                 <button pButton type="submit" label="Salvar" [disabled]="f.invalid" ></button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>
-
-
-
             </p-tabPanel>
         </p-tabView>
     </div>
-    <div class="ui-g-2"></div>
 </div>

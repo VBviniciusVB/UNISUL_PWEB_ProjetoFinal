@@ -1,13 +1,10 @@
 package br.unisul.provafinal.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +23,6 @@ public class Livro implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	//@OneToMany(mappedBy="livro")
-	//private List<Emprestimo> emprestimos = new ArrayList<>();
-	
 	// 1 - ID
 	// 2 - Título(Nome) do Livro
 	// 3 - Área(Tipo) do Livro
@@ -40,29 +34,21 @@ public class Livro implements Serializable {
 	private Integer estoque;
 	private String local;
 	
-	// Fim das variáveis
-
 	@JsonIgnore
 	@OneToMany(mappedBy="livro")
 	private List<Emprestimo> emprestimos = new ArrayList<>();
-	
-	//
 	
 	public Livro() {
 		
 	}
 
-	public Livro(Integer id, String nome, String area, Integer estoque, String local) 
-			 {
-		super();
+	public Livro(Integer id, String nome, String area, Integer estoque, String local){
 		this.id = id;
 		this.nome = nome;
 		this.area = area;
 		this.estoque = estoque;
 		this.local = local;
-	}
-
-	
+	}	
 	
 	public Integer getId() {
 		return id;
@@ -138,6 +124,4 @@ public class Livro implements Serializable {
 			return false;
 		return true;
 	}
-	
-
 }

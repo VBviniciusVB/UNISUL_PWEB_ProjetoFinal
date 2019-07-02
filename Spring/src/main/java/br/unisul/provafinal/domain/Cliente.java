@@ -2,12 +2,8 @@ package br.unisul.provafinal.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,31 +19,20 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
-	//@OneToMany(mappedBy="livro")
-	//private List<Emprestimo> emprestimos = new ArrayList<>();
+	private String nome;
+	private String tipo;
+	private String sexo;
+	private Integer idade;
 
 	// 1 - ID
 	// 2 - Nome
 	// 3 - Tipo (Professor ou Aluno)
 	// 4 - Sexo (Masculino ou Feminino)
 	// 5 - Idade
-	
-	private String nome;
-	//@OneToMany(mappedBy="livro")
-	//private List<TipoLivro> area = new ArrayList<>();
-	private String tipo;
-	private String sexo;
-	private Integer idade;
-
-	
-	// Fim das variáveis
 
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Emprestimo> emprestimos = new ArrayList<>();
-	
-	//
 	
 	public Cliente() {
 		
@@ -137,5 +122,4 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-
 }

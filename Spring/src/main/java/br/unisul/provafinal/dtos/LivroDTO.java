@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 import br.unisul.provafinal.domain.Livro;
 
-
 public class LivroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -74,7 +73,4 @@ public class LivroDTO implements Serializable {
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	
-	
-
 }

@@ -4,7 +4,7 @@
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <div class="ui-g">
-    <div class="ui-g-10">
+    <div class="ui-g-12">
         <h1>Clientes</h1>
     </div>
 </div>
@@ -23,8 +23,6 @@
                             <div class="ui-g-12">
                                 <button pButton type="submit" label="Pesquisar"></button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>
@@ -61,8 +59,6 @@
                 </div>
             </p-tabPanel>
 
-
-
             <p-tabPanel header="Cadastrar Cliente" leftIcon="pi pi-plus">
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
@@ -80,21 +76,18 @@
                                 <div *ngIf="nome.hasError('minlength')" >O nome deve ter no mínimo 3 letras</div>
 
                                 <label>Tipo :</label>
-
                                 <div class="ui-g" style="width:250px;margin-bottom:10px">
                                     <div class="ui-g-6"><p-radioButton name="grupo1" [(ngModel)]="cliente.tipo" value="Aluno" label="Aluno" [(ngModel)]="val1" inputId="preopt1"></p-radioButton></div>
                                     <div class="ui-g-6"><p-radioButton name="grupo1" [(ngModel)]="cliente.tipo" value="Professor" label="Professor" [(ngModel)]="val2" inputId="preopt2"></p-radioButton></div>
                                 </div>
 
                                 <label>Sexo :</label>
-
                                 <div class="ui-g" style="width:250px;margin-bottom:10px">
                                     <div class="ui-g-6"><p-radioButton name="grupo2" [(ngModel)]="cliente.sexo" value="Masculino" label="Masculino" [(ngModel)]="val3" inputId="preopt1"></p-radioButton></div>
                                     <div class="ui-g-6"><p-radioButton name="grupo2" [(ngModel)]="cliente.sexo" value="Feminino" label="Feminino" [(ngModel)]="val4" inputId="preopt2"></p-radioButton></div>
                                 </div>
 
                                 <label>Idade :</label>
-
                                 <input pInputText type="text" name="idade"
                                   [(ngModel)]="cliente.idade"
                                   pattern="[0-9]+"
@@ -114,5 +107,4 @@
             </p-tabPanel>
         </p-tabView>
     </div>
-    <div class="ui-g-2"></div>
 </div>
