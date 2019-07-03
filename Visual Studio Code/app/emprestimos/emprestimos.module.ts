@@ -17,6 +17,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {PickListModule} from 'primeng/picklist';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
+import {InputMaskModule} from 'primeng/inputmask';
 
 import { EmprestimosOpcoesComponent } from './emprestimos-opcoes/emprestimos-opcoes.component';
 
@@ -37,7 +38,8 @@ import { EmprestimosOpcoesComponent } from './emprestimos-opcoes/emprestimos-opc
     RadioButtonModule,
     PickListModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    InputMaskModule
   ],
   exports:[
     EmprestimosOpcoesComponent

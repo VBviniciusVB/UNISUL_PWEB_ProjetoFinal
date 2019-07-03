@@ -1,9 +1,12 @@
 package br.unisul.provafinal.dtos;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.unisul.provafinal.domain.Cliente;
 import br.unisul.provafinal.domain.Emprestimo;
@@ -24,8 +27,10 @@ public class EmprestimoDTO implements Serializable {
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	@Length(message="É preciso ter uma data de aquisicao")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private String dataemprestimo;
-
+	
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private String datadevolucao;
 	
 	public EmprestimoDTO() {
@@ -46,6 +51,8 @@ public class EmprestimoDTO implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
 
 	public String getDataemprestimo() {
 		return dataemprestimo;

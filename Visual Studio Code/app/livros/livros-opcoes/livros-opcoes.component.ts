@@ -127,6 +127,8 @@ export class LivrosOpcoesComponent implements OnInit {
    this.Editar = true;
    if (this.index == 0){
     this.pesquisar();
+   }else{
+    this.livro = new Livro();
    }
   }
 

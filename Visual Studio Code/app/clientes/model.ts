@@ -4,4 +4,5 @@ export class Cliente{
   tipo: string;
   sexo: string;
   idade: number;
+  alugou: number;
 }

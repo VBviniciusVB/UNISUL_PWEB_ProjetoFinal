@@ -1,25 +1,25 @@
 export class Emprestimo{
   id: number;
-  dataemprestimo: String;
-  datadevolucao: String;
-  livro: Livro[] = [];
-  cliente: Cliente[] = [];
-  //livro = new Livro();
-  //cliente = new Cliente();
+  dataemprestimo: string;
+  datadevolucao: string;
+  livro = new Livro();
+  cliente = new Cliente();
 }
 
 export class Livro{
   id: number;
-  nome: String;
-  area: String;
+  nome: string;
+  area: string;
   estoque: number;
-  local: String;
+  local: string;
+  alugados: number;
 }
 
 export class Cliente{
   id: number;
-  nome: String;
-  tipo: String;
-  sexo: String;
+  nome: string;
+  tipo: string;
+  sexo: string;
   idade: number;
+  alugou: number;
 }

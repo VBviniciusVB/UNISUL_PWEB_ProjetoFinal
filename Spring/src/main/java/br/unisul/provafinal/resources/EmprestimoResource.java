@@ -3,9 +3,11 @@ package br.unisul.provafinal.resources;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,19 @@ public class EmprestimoResource {
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Emprestimo obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	//LISTAR TODAS
+	@RequestMapping(value="/busca", method=RequestMethod.GET)
+	public ResponseEntity<List<EmprestimoDTO>> findAll(@RequestParam(required = false) String nome) {
+		List<Emprestimo> lista;
+		if (StringUtils.hasText(nome)) {
+			lista = service.findPorNome(nome);
+		} else {
+			lista = service.findAll();
+		}
+		List<EmprestimoDTO> listaDTO = lista.stream().map(emp -> new EmprestimoDTO(emp)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listaDTO);
 	}
 	
 	//INSERIR
@@ -76,14 +91,6 @@ public class EmprestimoResource {
 				return ResponseEntity.ok().body(listaDTO);
 			}
 
-	
-	
-	// BUSCAR POR NOME DO CLIENTE
-	@RequestMapping(value="/{clienteId}/cliente",method=RequestMethod.GET)
-	ResponseEntity<List<Emprestimo>> findByCliente(@PathVariable Integer clienteId) {
-		List<Emprestimo> list = service.findByCliente(clienteId);
-		return ResponseEntity.ok().body(list);
-	}
 	
 
 	

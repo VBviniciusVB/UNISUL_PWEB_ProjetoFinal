@@ -102,6 +102,8 @@ export class ClientesOpcoesComponent implements OnInit {
     this.Editar = true;
     if (this.index == 0){
       this.pesquisar();
+    }else{
+      this.cliente = new Cliente();
     }
   }
 

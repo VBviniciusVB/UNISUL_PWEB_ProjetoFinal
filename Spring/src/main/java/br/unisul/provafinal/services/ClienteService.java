@@ -24,6 +24,7 @@ public class ClienteService {
 		//INSERIR
 		public Cliente insert (Cliente obj) {
 			obj.setId(null);
+			obj.setAlugou(0);
 			return rep.save(obj);
 		}
 

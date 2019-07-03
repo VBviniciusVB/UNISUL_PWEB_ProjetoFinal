@@ -21,10 +21,6 @@ public interface EmprestimoRepository extends JpaRepository<Emprestimo, Integer>
 	List<Emprestimo> findByCliente(Cliente cliente);
 	
 	@Transactional(readOnly=true)
-	@Query("SELECT obj FROM Emprestimo obj WHERE obj.cliente.id = :clienteId ORDER BY obj.id")
-	public List<Emprestimo> findEmprestimos(@Param("clienteId") Integer cliente_id);
-	
-	
-
-
+	@Query("SELECT e FROM Emprestimo e left join e.cliente c join e.livro l WHERE c.nome like %:nome% or l.nome like %:nome% ORDER BY e.id")
+	public List<Emprestimo> findPorNome(@Param("nome") String nome);
 }

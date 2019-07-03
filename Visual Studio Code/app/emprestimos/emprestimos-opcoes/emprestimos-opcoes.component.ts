@@ -15,10 +15,10 @@ import { LivrosService } from '../../livros/livros.service';
 })
 export class EmprestimosOpcoesComponent implements OnInit {
 
-  // Com o NEW ele pega os valores ( Ex: ComboBox )
+  // Acessa o Model
   emprestimo = new Emprestimo();
 
-  // E esse faz o que ?
+  // Método Pesquisa
   emprestimos: Emprestimo[];
 
   // ComboBox
@@ -57,16 +57,70 @@ export class EmprestimosOpcoesComponent implements OnInit {
   };
 
   inserir(form: FormControl) {
-    this.service.adicionar(this.emprestimo).then( ()=>{
-      this.messageService.add({severity:'success', summary:'Inserção Concluida', detail:'O Emprestimo '+this.emprestimo.id+' foi adicionado'});
+
+    // Acessa o Cliente/Livro da COMBO BOX
+
+    this.clienteService.buscarPorCodigo(this.emprestimo.cliente.id).then((data) => {
+      this.emprestimo.cliente = data;
+
+      this.livroService.buscarPorCodigo(this.emprestimo.livro.id).then((data) => {
+        this.emprestimo.livro = data;
+
+        // Verifica se passou do limite de estoque ou de livros pro cliente
+
+        if(this.emprestimo.cliente.alugou >= 3){
+          this.messageService.add({severity:'error', summary:'Erro de Inserção', detail:'O cliente já possui o máximo de livros'});
+        }else{
+          if(this.emprestimo.livro.alugados >= this.emprestimo.livro.estoque){
+            this.messageService.add({severity:'error', summary:'Erro de Inserção', detail:'Todos os livros "'+this.emprestimo.livro.nome+'" já foram alugados'});
+          }else{
+
+            //Incrementa em +1 a quantia de livros do cliente e livros alugados
+
+            this.emprestimo.cliente.alugou = this.emprestimo.cliente.alugou + 1;
+            this.emprestimo.livro.alugados = this.emprestimo.livro.alugados + 1;
+
+            this.clienteService.alterar(this.emprestimo.cliente)
+            .then( ()=>{
+
+              this.livroService.alterar(this.emprestimo.livro)
+              .then( ()=>{
+
+                //Finalmente adiciona o Empréstimo
+
+                this.service.adicionar(this.emprestimo).then( ()=>{
+                  this.messageService.add({severity:'success', summary:'Inserção Concluida', detail:'O Emprestimo foi cadastrado no sistema'});
+                });
+              });
+            });
+          }
+        }
+      });
     });
   }
 
   alterar(form: FormControl) {
-    this.service.alterar(this.emprestimo)
-    .then( ()=>{
-      this.messageService.add({severity:'success', summary:'Edição Concluida', detail:'O emprestimo '+this.emprestimo.id+' foi alterado'});
-    });
+
+        // Decrementa os valores anteriores
+
+        this.emprestimo.cliente.alugou = this.emprestimo.cliente.alugou - 1;
+        this.emprestimo.livro.alugados = this.emprestimo.livro.alugados - 1;
+
+        this.clienteService.alterar(this.emprestimo.cliente)
+        .then( ()=>{
+          this.livroService.alterar(this.emprestimo.livro)
+          .then( ()=>{
+
+            this.service.alterar(this.emprestimo)
+            .then( ()=>{
+              this.messageService.add({severity:'success', summary:'Edição Concluida', detail:'O emprestimo '+this.emprestimo.id+' foi alterado'});
+
+              this.carregarEmprestimo(this.emprestimo.id);
+
+
+            });
+          });
+        });
   }
 
   salvar(form: FormControl) {
@@ -78,15 +132,38 @@ export class EmprestimosOpcoesComponent implements OnInit {
   }
 
   excluir(emprestimo: any){
-    this.service.excluir(emprestimo.id)
-    .then(()=>{
-      this.pesquisar();
-      this.messageService.add({severity:'success', summary:'Exclusão', detail:'Emprestimo '+emprestimo.id+' excluída'});
+
+    this.carregarEmprestimo(emprestimo.id);
+    this.emprestimo.cliente.id = emprestimo.cliente.id;
+
+    this.clienteService.buscarPorCodigo(this.emprestimo.cliente.id).then((data) => {
+      this.emprestimo.cliente = data;
+
+      this.livroService.buscarPorCodigo(this.emprestimo.livro.id).then((data) => {
+        this.emprestimo.livro = data;
+
+        this.emprestimo.cliente.alugou = this.emprestimo.cliente.alugou - 1;
+        this.emprestimo.livro.alugados = this.emprestimo.livro.alugados - 1;
+
+        this.clienteService.alterar(this.emprestimo.cliente)
+        .then( ()=>{
+
+          this.livroService.alterar(this.emprestimo.livro)
+          .then( ()=>{
+
+            this.service.excluir(emprestimo.id).then(()=>{
+              this.pesquisar();
+              this.messageService.add({severity:'success', summary:'Exclusão', detail:'Emprestimo '+emprestimo.id+' excluído'});
+
+            });
+          });
+        });
+      });
     });
   }
 
   pesquisar(){
-    this.service.pesquisar({nome:this.Procura})
+    this.service.pesquisar(this.Procura)
     .then((dados)=>{
       this.emprestimos=dados;
     });
@@ -124,6 +201,8 @@ export class EmprestimosOpcoesComponent implements OnInit {
    this.Editar = true;
    if (this.index == 0){
     this.pesquisar();
+   }else{
+     this.emprestimo = new Emprestimo();
    }
   }
 

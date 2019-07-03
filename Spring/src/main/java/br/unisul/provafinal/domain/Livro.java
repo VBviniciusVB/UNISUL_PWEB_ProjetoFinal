@@ -21,18 +21,19 @@ public class Livro implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id;	
+	private String nome;
+	private String area;
+	private Integer estoque;
+	private String local;
+	private Integer alugados;
 	
 	// 1 - ID
 	// 2 - Título(Nome) do Livro
 	// 3 - Área(Tipo) do Livro
 	// 4 - Número(Quantidade) do Livro
 	// 5 - Localização na Biblioteca
-	
-	private String nome;
-	private String area;
-	private Integer estoque;
-	private String local;
+	// 6 - Quantia Alugada
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="livro")
@@ -42,12 +43,13 @@ public class Livro implements Serializable {
 		
 	}
 
-	public Livro(Integer id, String nome, String area, Integer estoque, String local){
+	public Livro(Integer id, String nome, String area, Integer estoque, String local, Integer alugados){
 		this.id = id;
 		this.nome = nome;
 		this.area = area;
 		this.estoque = estoque;
 		this.local = local;
+		this.alugados = alugados;
 	}	
 	
 	public Integer getId() {
@@ -89,9 +91,17 @@ public class Livro implements Serializable {
 	public void setLocal(String local) {
 		this.local = local;
 	}
-	
-	
 
+	public Integer getAlugados() {
+		return alugados;
+	}
+
+	public void setAlugados(Integer alugados) {
+		this.alugados = alugados;
+	}
+
+	
+	
 	public List<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}

@@ -13,6 +13,7 @@
     <div class="ui-g-12">
         <p-tabView class= "Table" (onChange)="onTabChange($event)"  [activeIndex]="index">
             <p-tabPanel header="Procurar Emprestimo :" leftIcon="pi pi-search"  >
+
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
                         <div class="ui-g">
@@ -66,10 +67,10 @@
                             <div class="ui-g-12 ui-md-10 ui-fluid">
 
                               <label>Cliente :</label>
-                              <p-dropdown [options]="clientes" name="cliente" [(ngModel)]="emprestimo.cliente.nome" placeholder="Selecione um Cliente" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
+                              <p-dropdown [options]="clientes" name="cliente" [(ngModel)]="emprestimo.cliente.id" placeholder="Selecione um Cliente" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
 
                               <label>Livro :</label>
-                              <p-dropdown [options]="livros" name="livro" [(ngModel)]="emprestimo.livro.nome" placeholder="Selecione um Livro" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
+                              <p-dropdown [options]="livros" name="livro" [(ngModel)]="emprestimo.livro.id" placeholder="Selecione um Livro" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
 
                               <!--
 
@@ -84,17 +85,23 @@
                                   </ng-template>
                                 </p-pickList>
 
-                              -->
-
                                 <div class="ui-g-12 ui-md-8">
                                   <label>Data de Aquisição :</label>
-                                  <p-calendar [(ngModel)]="emprestimo.dataemprestimo" name="dataemprestimo" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+                                  <p-calendar [(ngModel)]="emprestimo.dataemprestimo" dateFormat="dd-mm-yy" name="dataemprestimo" [showIcon]="true"></p-calendar>
                                 </div>
 
                                 <div class="ui-g-12 ui-md-8">
                                   <label>Data máxima para Devolução :</label>
-                                  <p-calendar [(ngModel)]="emprestimo.datadevolucao" name="datadevolucao" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+                                  <p-calendar [(ngModel)]="emprestimo.datadevolucao" dateFormat="dd-mm-yy"  name="datadevolucao"  [showIcon]="true"></p-calendar>
                                 </div>
+
+                              -->
+
+                                <label>Data de Aquisição :</label>
+                                <p-inputMask mask="99/99/9999" [(ngModel)]="emprestimo.dataemprestimo" name="dataemprestimo" placeholder="99/99/9999"></p-inputMask>
+
+                                <label>Data máxima para Devolução :</label>
+                                <p-inputMask mask="99/99/9999" [(ngModel)]="emprestimo.datadevolucao" name="datadevolucao" placeholder="99/99/9999"></p-inputMask>
 
                             </div>
                             <div class="ui-g-12">

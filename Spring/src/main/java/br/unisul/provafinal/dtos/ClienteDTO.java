@@ -25,6 +25,7 @@ public class ClienteDTO implements Serializable {
 	@Length(min=6, message="Para ser cliente deve ter no mínimo 6 anos de idade")
 	private Integer idade;
 
+	private Integer alugou;
 
 
 	public ClienteDTO() {
@@ -36,6 +37,7 @@ public class ClienteDTO implements Serializable {
 		tipo = obj.getTipo();
 		sexo = obj.getSexo();
 		idade = obj.getIdade();
+		alugou = obj.getAlugou();
 	}
 
 	public Integer getId() {
@@ -77,4 +79,13 @@ public class ClienteDTO implements Serializable {
 	public void setIdade(Integer idade) {
 		this.idade = idade;
 	}
+
+	public Integer getAlugou() {
+		return alugou;
+	}
+
+	public void setAlugou(Integer alugou) {
+		this.alugou = alugou;
+	}
+	
 }

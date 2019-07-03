@@ -37,6 +37,7 @@
                                   <th>Tipo</th>
                                   <th>Sexo</th>
                                   <th>Idade</th>
+                                  <th>Livros</th>
                                   <th class="col-acoes">Ações</th>
                                 </tr>
                              </ng-template>
@@ -48,6 +49,7 @@
                                   <td>{{cli.tipo}}</td>
                                   <td>{{cli.sexo}}</td>
                                   <td>{{cli.idade}}</td>
+                                  <td>{{cli.alugou}}</td>
                                   <td class="col-acoes">
                                       <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" showDelay="500"  class="ui-button-info" (click)="OpenCadastro(cli.id)"></button>
                                       <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" showDelay="500"  class="ui-button-info" (click)="ConfirmarExclusao(cli)"></button>

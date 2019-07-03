@@ -12,6 +12,7 @@
 <div class="ui-g">
     <div class="ui-g-12">
         <p-tabView class= "Table" (onChange)="onTabChange($event)"  [activeIndex]="index">
+
             <p-tabPanel header="Procurar Livro :" leftIcon="pi pi-search"  >
                 <div class="container">
                     <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
@@ -35,8 +36,9 @@
                                   <th class="liv-id-header">ID</th>
                                   <th>Nome</th>
                                   <th>Área</th>
-                                  <th>Estoque</th>
                                   <th>Estante</th>
+                                  <th>Estoque</th>
+                                  <th>Alugados</th>
                                   <th class="col-acoes">Ações</th>
                                 </tr>
                              </ng-template>
@@ -46,8 +48,9 @@
                                   <td class="col-id">{{liv.id}}</td>
                                   <td>{{liv.nome}}</td>
                                   <td>{{liv.area}}</td>
-                                  <td>{{liv.estoque}}</td>
                                   <td>{{liv.local}}</td>
+                                  <td>{{liv.estoque}}</td>
+                                  <td>{{liv.alugados}}</td>
                                   <td class="col-acoes">
                                       <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" showDelay="500"  class="ui-button-info" (click)="OpenCadastro(liv.id)"></button>
                                       <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" showDelay="500"  class="ui-button-info" (click)="ConfirmarExclusao(liv)"></button>

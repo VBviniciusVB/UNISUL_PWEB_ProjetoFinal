@@ -23,12 +23,14 @@ public class Cliente implements Serializable {
 	private String tipo;
 	private String sexo;
 	private Integer idade;
+	private Integer alugou;
 
 	// 1 - ID
 	// 2 - Nome
 	// 3 - Tipo (Professor ou Aluno)
 	// 4 - Sexo (Masculino ou Feminino)
 	// 5 - Idade
+	// 6 - Alugou 
 
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
@@ -38,7 +40,7 @@ public class Cliente implements Serializable {
 		
 	}
 
-	public Cliente(Integer id, String nome, String tipo, String sexo, Integer idade) 
+	public Cliente(Integer id, String nome, String tipo, String sexo, Integer idade, Integer alugou) 
 			 {
 		super();
 		this.id = id;
@@ -46,6 +48,7 @@ public class Cliente implements Serializable {
 		this.tipo = tipo;
 		this.sexo = sexo;
 		this.idade = idade;
+		this.alugou = alugou;
 	}
 	
 	public Integer getId() {
@@ -86,6 +89,14 @@ public class Cliente implements Serializable {
 
 	public void setIdade(Integer idade) {
 		this.idade = idade;
+	}	
+	
+	public Integer getAlugou() {
+		return alugou;
+	}
+
+	public void setAlugou(Integer alugou) {
+		this.alugou = alugou;
 	}
 
 	

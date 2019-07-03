@@ -34,8 +34,8 @@ public class EmprestimoService {
 	@Autowired
 	private ClienteService clienteService;	
 
-	public List<Emprestimo> findByCliente(Integer clienteId) {
-		return repo.findEmprestimos(clienteId);
+	public List<Emprestimo> findPorNome(String nome) {
+		return repo.findPorNome(nome);
 	}
 	
 	//BUSCAR POR ID
@@ -56,19 +56,11 @@ public class EmprestimoService {
 		repo.deleteById(id);
 	}
 
-	
+	//INSERIR
 	public Emprestimo insert(Emprestimo obj) {
 		obj.setId(null);
-		//obj.setCliente(clienteService.find(1));
-		//JOptionPane.showMessageDialog(null, "##############Teste"+clienteService.find(obj.getCliente().getId()));
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
-		//
 		obj.setLivro(livroService.find(obj.getLivro().getId()));
-		//obj.getDatadevolucao();
-		//obj.getDataemprestimo();
-		
-		//emprestimoPedidoRepository.saveAll(obj.getItens());
-		
 		obj = repo.save(obj);
 		return obj;
 		

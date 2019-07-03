@@ -24,6 +24,7 @@ public class LivroService {
 		//INSERIR
 		public Livro insert (Livro obj) {
 			obj.setId(null);
+			obj.setAlugados(0);
 			return rep.save(obj);
 		}
 

@@ -22,6 +22,8 @@ public class LivroDTO implements Serializable {
 	private Integer estoque;
 	
 	private String local;
+	
+	private Integer alugados;
 
 	public LivroDTO() {
 	}
@@ -32,6 +34,7 @@ public class LivroDTO implements Serializable {
 		area = obj.getArea();
 		estoque = obj.getEstoque();
 		local = obj.getLocal();
+		alugados = obj.getAlugados();
 	}
 
 	public Integer getId() {
@@ -73,4 +76,14 @@ public class LivroDTO implements Serializable {
 	public void setLocal(String local) {
 		this.local = local;
 	}
+
+	public Integer getAlugados() {
+		return alugados;
+	}
+
+	public void setAlugados(Integer alugados) {
+		this.alugados = alugados;
+	}
+	
+	
 }

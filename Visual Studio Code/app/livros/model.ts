@@ -4,4 +4,5 @@ export class Livro{
   area: string;
   estoque: number;
   local: string;
+  alugados: number;
 }
