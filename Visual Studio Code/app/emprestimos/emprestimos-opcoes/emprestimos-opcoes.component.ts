@@ -101,15 +101,6 @@ export class EmprestimosOpcoesComponent implements OnInit {
 
   alterar(form: FormControl) {
 
-        // Decrementa os valores anteriores
-
-        this.emprestimo.cliente.alugou = this.emprestimo.cliente.alugou - 1;
-        this.emprestimo.livro.alugados = this.emprestimo.livro.alugados - 1;
-
-        this.clienteService.alterar(this.emprestimo.cliente)
-        .then( ()=>{
-          this.livroService.alterar(this.emprestimo.livro)
-          .then( ()=>{
 
             this.service.alterar(this.emprestimo)
             .then( ()=>{
@@ -118,8 +109,6 @@ export class EmprestimosOpcoesComponent implements OnInit {
               this.carregarEmprestimo(this.emprestimo.id);
 
 
-            });
-          });
         });
   }
 
