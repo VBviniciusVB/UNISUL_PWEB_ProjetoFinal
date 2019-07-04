@@ -18,6 +18,9 @@ export class EmprestimosOpcoesComponent implements OnInit {
   // Acessa o Model
   emprestimo = new Emprestimo();
 
+  // Salva em qual emprestimo estava antes de ALTERAR
+  emprestimoEdita = new Emprestimo();
+
   // Método Pesquisa
   emprestimos: Emprestimo[];
 
@@ -60,6 +63,8 @@ export class EmprestimosOpcoesComponent implements OnInit {
 
     // Acessa o Cliente/Livro da COMBO BOX
 
+
+
     this.clienteService.buscarPorCodigo(this.emprestimo.cliente.id).then((data) => {
       this.emprestimo.cliente = data;
 
@@ -101,15 +106,57 @@ export class EmprestimosOpcoesComponent implements OnInit {
 
   alterar(form: FormControl) {
 
+    this.CarregarEmprestimoEditar(this.emprestimo.id);
 
-            this.service.alterar(this.emprestimo)
-            .then( ()=>{
-              this.messageService.add({severity:'success', summary:'Edição Concluida', detail:'O emprestimo '+this.emprestimo.id+' foi alterado'});
+    this.service.alterar(this.emprestimo).then( ()=>{
 
-              this.carregarEmprestimo(this.emprestimo.id);
+      this.carregarEmprestimo(this.emprestimo.id);
 
 
+      if(this.emprestimo.cliente.alugou >= 3){
+
+        this.service.alterar(this.emprestimoEdita).then( ()=>{
         });
+        this.messageService.add({severity:'error', summary:'Erro de Alteração', detail:'O cliente já possui o máximo de livros'});
+
+      }else{
+        if(this.emprestimo.livro.alugados >= this.emprestimo.livro.estoque){
+
+          this.service.alterar(this.emprestimoEdita).then( ()=>{
+          });
+          this.messageService.add({severity:'error', summary:'Erro de Alteração', detail:'Todos os livros "'+this.emprestimo.livro.nome+'" já foram alugados'});
+
+        }else{
+
+
+          this.emprestimoEdita.cliente.alugou = this.emprestimoEdita.cliente.alugou - 1;
+          this.emprestimoEdita.livro.alugados = this.emprestimoEdita.livro.alugados - 1;
+
+          this.clienteService.alterar(this.emprestimoEdita.cliente)
+          .then( ()=>{
+
+            this.livroService.alterar(this.emprestimoEdita.livro)
+            .then( ()=>{
+
+              this.emprestimo.cliente.alugou = this.emprestimo.cliente.alugou + 1;
+              this.emprestimo.livro.alugados = this.emprestimo.livro.alugados + 1;
+
+              this.clienteService.alterar(this.emprestimo.cliente)
+              .then( ()=>{
+
+                this.livroService.alterar(this.emprestimo.livro)
+                .then( ()=>{
+
+                  this.messageService.add({severity:'success', summary:'Edição Concluida', detail:'O emprestimo '+this.emprestimo.id+' foi alterado'});
+
+                });
+              });
+
+            });
+          });
+        }
+      }
+    });
   }
 
   salvar(form: FormControl) {
@@ -162,6 +209,16 @@ export class EmprestimosOpcoesComponent implements OnInit {
     this.service.buscarPorCodigo(id)
       .then((data) => {
         this.emprestimo = data;
+
+      }
+    );
+  }
+
+  CarregarEmprestimoEditar(id:number){
+    this.service.buscarPorCodigo(id)
+      .then((data) => {
+        this.emprestimoEdita = data;
+
       }
     );
   }
